@@ -3,7 +3,7 @@ from Time_Stamp_Converter import Time_Stamp_Converter as tp
 
 #TEST CLASS TIME_STAMP_CONVERTER
 obj=tp()
-val=obj.convert (1,11,2017)
+val=obj.convert (1,11,2017,5,23)
 print (val)
 obj.print_last_timestamp()
 
