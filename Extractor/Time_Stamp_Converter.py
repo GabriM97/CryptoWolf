@@ -12,7 +12,9 @@ class Time_Stamp_Converter:
 	def convert (self,day,month,year,hour,minutes):
 		obj=datetime (year, month, day, hour, minutes)
 		self.timestamp=obj.timestamp()
-		return self.timestamp
+		ret=str(self.timestamp)
+		ret=ret[:len(ret)-2]
+		return ret
 
 	#The print_last_timestamp method prints the last timestamp in a date-time format
 	def print_last_timestamp (self):
