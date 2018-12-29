@@ -60,19 +60,16 @@ class Gradient_Descent:
 
 	#The plot_learning_curve method allows you to plot the (Number_of_Iterations VS Error) Graphic
 	def plot_learning_curve (self):
-		plt.plot(self.iter,self.db) 
-
-		plt.xlabel('N Iterazioni ') 
-		plt.ylabel('Errore')   
-
-		plt.title('Curva di Learning') 
-
+		plt.plot(self.iter,self.db)
+        
+		plt.xlabel('Iterations')
+		plt.ylabel('Error')   
+		plt.title('Learning Curve') 
 		plt.show() 
 
 	#The print_iter_report method allows you to visualize a report of last Gradient Descent Execution, for every iteration you can view the Cost Function Value
 	def print_iter_report (self):
-		for i in range (len(self.iter)):
-
+		for i in range(len(self.iter)):
 			print ("Iter: {} - J: {} \n".format (self.iter[i],self.db[i]))
 
 
