@@ -54,7 +54,11 @@ class Gradient_Descent:
 		cost=Cost_Function()
 
 		for i in range (n_param):
-			tmp_params[i]=((param[i]*(1-((alpha*lamb)/n_ele))) - (alpha * cost.perform_der_par (model,x,y,n_ele,param,n_param,i)))
+
+			if (i==0):
+				tmp_params[i]=param[i]-alpha*cost.perform_der_par (model,x,y,n_ele,param,n_param,i)		
+			else:
+				tmp_params[i]=((param[i]*(1-((alpha*lamb)/n_ele))) - (alpha * cost.perform_der_par (model,x,y,n_ele,param,n_param,i)))
 
 		return tmp_params
 

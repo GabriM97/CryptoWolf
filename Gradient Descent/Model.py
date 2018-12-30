@@ -30,13 +30,11 @@ class Model:
 		if ((len(x))!=len(param) or len (param) != (len(self.regressor))):
 			print ("Error, the passed datas are incoerent with the model")
 			return
-
+		
 		prediction=0.0
-		for i in range (len(self.regressor)):
-			if (i==0):
-				prediction+=param[i]
-			else:
-				prediction+=(x[i]**self.regressor[i].degree)*param[i]	
+		prediction+=param[0]
+		for i in range (1,len(self.regressor)):
+			prediction+=(x[i]**self.regressor[i].degree)*param[i]	
 		return prediction
 
 	#The print_model method allows you to visualize the Model that you have built, in order to understand the scenary
@@ -45,11 +43,10 @@ class Model:
 			print ("Error, model isn't setted \n")
 			return;
 
-		print ("h_theta_(x)= ")
+		print ("h_theta_(x)= theta_0 + ")
 
-		for i in range (len (self.regressor)):
-			if (i==0): print ("theta_0 + ")
-			if (i>0):print ("theta_{}*x{}_exp_{} + ".format(i,i,self.regressor[i].degree))
+		for i in range (1,len (self.regressor)):
+			print ("theta_{}*x{}_exp_{} + ".format(i,i,self.regressor[i].degree))
 		
 
 
