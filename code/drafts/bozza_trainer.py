@@ -52,6 +52,7 @@ class Trainer:
 
 	def save_best_estimator (self):
 
+		self.take_the_best_model_from_last_training()
 		best_model = open('best_model.obj', 'w')
 		pickle.dump(self.best_model, best_model)
 
