@@ -1,3 +1,9 @@
+v1.2{
+
+-Non rilvent changes to Docs
+
+}
+
 v1.1{
 
 -Tuning of the Project Docs, now Road-Map would must be completed.
