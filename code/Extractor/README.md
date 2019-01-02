@@ -1,3 +1,13 @@
+v1.3{
+
+-Added a method ,into Time_Stamp_Converter class, that converts a timestamp into a date and time , expressed in local timezone.
+-Fixed ohlc method logic on Extractor class
+-Fixed retrieve_data method on Extractor class, now error handling is right
+-Periods_Maker, this class helps you to make right "periods" paramiter for ohlc method of Extractor Class
+-Reorganization of Tests
+
+}
+
 v1.2 {
 
 -Fix data type returned from convert method of Time_Stamp_Converter Class, now data type returned is ready for the Extractor Library Calls.

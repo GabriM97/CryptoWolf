@@ -13,11 +13,14 @@ class Extractor:
 		try:
 			with urllib.request.urlopen(index) as url:
 				data=json.loads(url.read().decode())
-			if (data['allowance']['remaining']<=0):
-				return (-5)
 			return data	
-		except URLError:
-			return -1
+		except urllib.error.HTTPError as e:
+			if (e.code==400):
+				return -1
+			if (e.code==429):
+				return -2	
+		except:
+			return -3
 
 	#The asset_index method allows you to retrieve the list of all coins
 	def asset_index (self):
@@ -230,8 +233,6 @@ class Extractor:
 			index+="/"
 			index+="ohlc"
 			return self.retrieve_data (index)
-		elif ((before!=-5 or after!=-5) and periods!=-5):
-			return -6
 		elif (before!=-5 and after==-5 and periods==-5):
 			index="https://api.cryptowat.ch/markets/"
 			index+=exchange
@@ -264,7 +265,7 @@ class Extractor:
 			index+="&after="
 			index+=after
 			return self.retrieve_data (index)
-		elif (periods!=-5):
+		elif (periods!=-5 and before==-5 and after==-5):
 			index="https://api.cryptowat.ch/markets/"
 			index+=exchange
 			index+="/"
@@ -273,7 +274,45 @@ class Extractor:
 			index+="ohlc"
 			index+="?periods="
 			index+=periods
+			return self.retrieve_data (index)
+		elif (periods!=-5 and before!=-5 and after==-5):
+			index="https://api.cryptowat.ch/markets/"
+			index+=exchange
+			index+="/"
+			index+=pair
+			index+="/"
+			index+="ohlc"
+			index+="?periods="
+			index+=periods
+			index+="&before="
+			index+=before
 			return self.retrieve_data (index)	
+		elif (periods!=-5 and after!=-5 and before==-5):
+			index="https://api.cryptowat.ch/markets/"
+			index+=exchange
+			index+="/"
+			index+=pair
+			index+="/"
+			index+="ohlc"
+			index+="?periods="
+			index+=periods
+			index+="&after="
+			index+=after
+			return self.retrieve_data (index)
+		elif (periods!=-5 and before!=-5 and after!=-5):
+			index="https://api.cryptowat.ch/markets/"
+			index+=exchange
+			index+="/"
+			index+=pair
+			index+="/"
+			index+="ohlc"
+			index+="?periods="
+			index+=periods
+			index+="&before="
+			index+=before
+			index+="&after="
+			index+=after
+			return self.retrieve_data (index)
 			
 
 	#The prices method returns the current price for all supported markets.
