@@ -1,3 +1,9 @@
+v1.3{
+
+-Fixed Higher Order Models Problem into Doc
+
+}
+
 v1.2{
 
 -Non rilvent changes to Docs
