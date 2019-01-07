@@ -1,3 +1,16 @@
+v1.4{
+
+-Added following classes:
+	- JSON_Saver: allows to extract and save in JSON files all candlestick of a Market from a timestamp.
+	- Dataset_Maker: creates a pair of matrices for each candlestick period; This two matrices will be our Dataset.
+	- Dataset_Creator: helps to create the Dataset. You only need to execute the method run_all() or run_only_maker() with the chosen candlestick period.
+-tester.py is now more modular and new methods were added to tests the new classes.
+-More details for each component in the files.
+
+}
+
+
+
 v1.3{
 
 -Added a method ,into Time_Stamp_Converter class, that converts a timestamp into a date and time , expressed in local timezone.
