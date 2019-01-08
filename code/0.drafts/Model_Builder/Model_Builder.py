@@ -5,7 +5,7 @@ The Model_Builder class helps you to build a well-done list of Models, in a inte
 """
 
 import numpy as np
-import copy 
+import copy
 import pickle
 
 class Model_Builder:
@@ -16,7 +16,7 @@ class Model_Builder:
 
 	#The build method builds a set of Models in a interactive way
 	def build (self,X_Train):
-		
+
 		n=len(X_Train[0])
 		print ("Max Features Number: {}".format(n))
 		print ("")
@@ -41,7 +41,7 @@ class Model_Builder:
 			sample_model.append(-1)
 
 		for i in list(range(n_models)):
-			self.models.append(copy.deepcopy(sample_model))		
+			self.models.append(copy.deepcopy(sample_model))
 
 		for i in list(range (n_models)):
 			print ("Model Number {} \n".format(i+1))
@@ -73,7 +73,7 @@ class Model_Builder:
     						print ("Not a number")
 
 					print ("")
-					if (degree<=0): 
+					if (degree<=0):
 						print ("Error, you have inserted a non-valid degree, retry \n")
 						return
 
@@ -85,7 +85,7 @@ class Model_Builder:
 					print ("You have removed the feature Number {} !".format(j+1))
 					print ("")
 					self.models[i][j]=0
-	
+
 		self.print_last_list()
 		return self.models
 
@@ -106,7 +106,7 @@ class Model_Builder:
 				print ("h_theta_(x)= theta_0 + ")
 
 				k=1
-			
+
 				for i in range (len (self.models[j])):
 					if (self.models[j][i]>0):
 						print ("theta_{}*x{}_exp_{} + ".format(k,i+1,self.models[j][i]))
@@ -114,26 +114,44 @@ class Model_Builder:
 
 				print ("")
 
-	#The save_models method saves the last set of Models built in a .pkl file 
+	def print_input_models (self,models):
+
+		if (len(models)==0):
+			print ("Error, You have passed an empty list :( \n")
+			return;
+
+		empty_model=list()
+		for i in range (len(models[0])):
+			empty_model.append(0)
+
+		for j in range (len(models)):
+			if (models[j]!=empty_model):
+				print ("Model Number {} \n".format (j+1))
+				print ("h_theta_(x)= theta_0 + ")
+
+				k=1
+
+				for i in range (len (models[j])):
+					if (models[j][i]>0):
+						print ("theta_{}*x{}_exp_{} + ".format(k,i+1,models[j][i]))
+						k=k+1
+
+				print ("")
+
+	#The save_models method saves the last set of Models built in a .pkl file
 	def save_models (self):
 
 		if (self.setted>0):
 			with open("models.pkl",'wb') as out:
 				pickle.dump({'Models':self.models,},out)
 		else:
-			print ("Error, there isn't any model in the list :( \n")	
+			print ("Error, there isn't any model in the list :( \n")
 
-	#The load_models method loads from a .pkl file the last set of Models built 
+	#The load_models method loads from a .pkl file the last set of Models built
 	def load_models (self):
-
-		with open("models.pkl", "rb") as inp:
-			data=pickle.load(inp)
-
+		try:
+			with open("models.pkl", "rb") as inp:
+				data=pickle.load(inp)
+		except IOError:
+			return -1
 		return data
-
-
-					
-						
-		
-
-	

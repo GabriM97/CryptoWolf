@@ -14,26 +14,19 @@ theta_1_4 = regressor.coef_
 print (theta_0)
 print (theta_1_4.shape)
 
-new_x=list()
-for i in range (len(x)):
-	new_x.append(x[i][0])
-
-obj.plot_2D_H (new_x,y,regressor)
+obj.plot_2D_H (x,y,regressor,"1")
 
 #TEST CLASS Curve - plot_3D_H	
 
-new_y=list()
-for i in range (len(x)):
-	new_y.append(x[i][1])
-
-obj.plot_3D_H (new_x,new_y,y,regressor)
+obj.plot_3D_H (x,y,regressor,"2")
 
 #TEST CLASS Curve - plot_degree_graphic
 
 degree=[1,2,3,4,5]
 j_train=[1000,850,550,350,250]
 j_cv=[1200,1100,1050,1400,1600]
-obj.plot_degree_graphic (degree,j_train,j_cv)
+idx=[0,1,2,3,4]
+obj.plot_degree_graphic (degree,j_train,j_cv,idx)
 
 
 
