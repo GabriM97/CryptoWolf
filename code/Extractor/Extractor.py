@@ -322,14 +322,3 @@ class Extractor:
 	#The summaries method returns the market summary for all supported markets.
 	def summaries (self):
 		return self.retrieve_data("https://api.cryptowat.ch/markets/summaries")	
-
-	
-
-	
-
-	
-	
-	
-
-	
-			

@@ -6,6 +6,7 @@ This class will create a pair of matrices for each periods of candlestick. This 
 import json
 import pickle
 import os
+import numpy as np
 from Periods_Maker import Periods_Maker as PM
 from Time_Stamp_Converter import Time_Stamp_Converter as TSC
 
@@ -16,14 +17,6 @@ class Dataset_Maker:
        self.exchange = exchange
        self.pair = pair
        self.container = dict()
-
-
-    # The extract method returns the content of the json file
-    def extract(self):
-        json_file = "{}json/{}.json".format(self.filepath, self.period) 
-        with open(json_file, "rb") as inp:
-            data = json.load(inp)
-        return data
 
 
     # This method reads the json file and creates the pair of matrices that will contains info about candlesticks of a single period
@@ -40,8 +33,11 @@ class Dataset_Maker:
             row, closePrice = self._make_data(candles,i)
             candles_matrix.append(row)
             close_matrix.append(closePrice)
+            
+            np_candles_matrix = np.array(candles_matrix)
+            np_close_matrix = np.array(close_matrix)
 
-        self.container = (close_matrix, candles_matrix)
+        self.container = (np_close_matrix, np_candles_matrix)
         return self.container
 
 
@@ -57,9 +53,17 @@ class Dataset_Maker:
         row.append(round(candle[3],2))  # Low Price
         row.append(round(candle[5],2))  # Volume
         
-        closePrice = round(candle[4],2)
+        closePrice = round(candle[4],2) # Close Price
         return row, closePrice
 
+
+    # The extract method returns the content of the json file
+    def extract(self):
+        json_file = "{}json/{}.json".format(self.filepath, self.period) 
+        with open(json_file, "rb") as inp:
+            data = json.load(inp)
+        return data
+    
 
     # The print_data method prints an output for each candlestick      output format: [TIMESTAMP - PRICE - VOLUME]
     def print_data(self, dataset):
@@ -77,21 +81,21 @@ class Dataset_Maker:
 
         print("\n"+ self.exchange.title() +" - "+ self.pair.upper())
         print("Candles Stick Period:", output_period)
-
+        print("Total Candles:", len(dataset[0]))
 
     # The save_on_file method allows to save the dataset on file
     def save_on_file(self, dataset):
         if len(dataset) >= 1:
             closePrice_matrix = dataset[0]
             candlestick_matrix = dataset[1]
-            self.save(candlestick_matrix, closePrice_matrix, self.period)
-            print("\nMatrixs saved")
+            self.save(candlestick_matrix, closePrice_matrix)
+            #print("\nMatrixs saved")
         else:
            print("\nError! Nothing to save!")
 
 
     # The save method creates the filepath and saves the dataset on a ".plk" file. It will create directories if the filepath doesn't exists
-    def save(self, candles, closePrices, period):
+    def save(self, candles, closePrices):
         plk_file = "{}.plk".format(self.period)
         directory = "{}plk/".format(self.filepath)
 

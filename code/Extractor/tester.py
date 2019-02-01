@@ -4,6 +4,7 @@ from JSON_Saver import JSON_Saver as JSave
 from Dataset_Maker import Dataset_Maker as DataMak
 from Periods_Maker import Periods_Maker as PM
 from Dataset_Creator import Dataset_Creator as DC
+from Cleaner import Cleaner as CLN
 
 def test_tm_stmp_cnvrt():
     #TEST CLASS TIME_STAMP_CONVERTER
@@ -31,6 +32,7 @@ def test_Period_Maker():
     	exit()
     print("\n")
     return periods, dic, dic_rev
+
 
 def test_Extractor():
     #TEST CLASS EXTRACTOR - OHLC METHOD
@@ -62,6 +64,7 @@ def test_Extractor():
     	print ("Example 1-Minute Candle: {} ".format(candle_1_minute[0]))
     	print ("Example 3-Minutes Candle: {} ".format(candle_3_minutes[0]))
     
+    
 # Saver for each candlestick
 def test_JSON_Saver():
     #TEST CLASS JSON_SAVER - SAVE_ON_FILE METHOD
@@ -72,6 +75,7 @@ def test_JSON_Saver():
     
     jsav.save_on_file(exchange, pair, date)
     print("Candles Stick Saved!")
+    
     
 # Create a dataset for only one period of candlestick
 def test_Dataset_Maker():
@@ -87,19 +91,18 @@ def test_Dataset_Maker():
     dataMaker.print_datas(dataset)
     dataMaker.save_on_file(dataset)
 
-# "Automatic" process to create a Dataset
+
+# Easier process to create the Dataset.
 def test_Dataset_Creator():
-    #TEST CLASS DATASET_CREATOR - RUN_ALL AND RUN_ONLY_MAKER
+    #TEST CLASS DATASET_CREATOR
     exchange = "bitstamp"
     pair = "btcusd"
     period = "12-h"  # Has to respect the Periods_Maker class style
 
-    obj = DC(exchange, pair)
-    
-    # At the first run you have to call run_all method to download JSON files
-    dataset = obj.run_all(period)
-    #dataset = obj.run_only_maker(period)
-        
+    creator = DC(exchange, pair)
+    training_set, test_set = creator.create_dataset(period, updated=True, cleaning_type=1)
+    # It's possible to call create_dataset method with "period" parameter only, other parameters
+    # will be initialized as default value "updated=True" and "cleaning_type=0"
     
 #  ------  MAIN  ------
 
