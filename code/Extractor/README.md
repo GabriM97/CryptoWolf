@@ -1,4 +1,4 @@
-v0.6{
+v1.0{
 
 - Dataset_Maker: now create a "Numpy Dataset".
 - Cleaner: clean the features. Added Feature_Scaling and Mean_Normalization methods.
