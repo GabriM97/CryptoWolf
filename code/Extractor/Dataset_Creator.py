@@ -38,7 +38,7 @@ class Dataset_Creator:
         if updated:
             self.save_json()
         
-        dirty_dataset = self.make_dataset()
+        dirty_dataset = self.make_dataset(self.period)
         #self.dataMaker.print_data(dirty_dataset)
         
         if cleaning_type == 0:
@@ -62,7 +62,8 @@ class Dataset_Creator:
         
         
     # The make_dataset method saves and returns the dataset created
-    def make_dataset(self):
+    def make_dataset(self, period):
+        self.period = period
         dataset = self.dataMaker.load_json_candlestick(self.period)
         self.dataMaker.save_on_file(dataset)
         return dataset
