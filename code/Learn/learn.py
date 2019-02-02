@@ -4,7 +4,6 @@ from Dataset_Creator import Dataset_Creator
 from Model_Printer import Model_Printer
 from Trainer import Trainer
 from sklearn.decomposition import PCA 
-from Model_Printer import Model_Printer
 from sklearn.metrics import mean_absolute_error
 
 
