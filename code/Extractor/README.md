@@ -1,5 +1,24 @@
 v1.0{
 
+- Graph:
+	created class Graph. It plts CloseTime vs ClosePrice
+- Dataset_Creator:
+		now it's possible to NOT apply a cleaning type (default)
+- Modified Tester for testing Graph Class
+
+}
+
+
+v0.7{
+
+- Added Graph class. Allows to plot the Chart of the crypto in analysis
+- Modified Tester class to test the new Graph class.
+
+}
+
+
+v0.6{
+
 - Dataset_Maker: now create a "Numpy Dataset".
 - Cleaner: clean the features. Added Feature_Scaling and Mean_Normalization methods.
 - Dataset_Creator: now the dataset creation is more easier thanks to create_dataset() method. Added Dataset Split method and Dataset Saving methods.

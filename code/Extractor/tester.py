@@ -5,6 +5,7 @@ from Dataset_Maker import Dataset_Maker as DataMak
 from Periods_Maker import Periods_Maker as PM
 from Dataset_Creator import Dataset_Creator as DC
 from Cleaner import Cleaner as CLN
+from Graph import Graph
 
 def test_tm_stmp_cnvrt():
     #TEST CLASS TIME_STAMP_CONVERTER
@@ -100,9 +101,21 @@ def test_Dataset_Creator():
     period = "12-h"  # Has to respect the Periods_Maker class style
 
     creator = DC(exchange, pair)
-    training_set, test_set = creator.create_dataset(period, updated=True, cleaning_type=1)
+    training_set, test_set = creator.create_dataset(period, updated=True, cleaning_type=0)
     # It's possible to call create_dataset method with "period" parameter only, other parameters
     # will be initialized as default value "updated=True" and "cleaning_type=0"
+    print(training_set[1])
+    
+# Plot the graph Timestamp vs ClosePrice  
+def test_Graph():
+    # TEST CLASS GRAPH
+    exchange = "bitstamp"
+    pair = "btcusd"
+    period = "12-h"
+    
+    graph = Graph(exchange, pair, period)
+    graph.plotCryptoGraph()
+    
     
 #  ------  MAIN  ------
 
@@ -112,3 +125,4 @@ def test_Dataset_Creator():
 #test_JSON_Saver()
 #test_Dataset_Maker()
 test_Dataset_Creator()
+test_Graph()
