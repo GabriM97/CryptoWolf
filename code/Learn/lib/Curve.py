@@ -12,7 +12,7 @@ from mpl_toolkits.mplot3d import Axes3D
 class Curve:
 
 	#The "plot_2D_H" method plots 2D-Hypothesis Graphic for the first feature of the Training-Set
-	def plot_2D_H (self,x_list,y_list,regressor,model):
+	def plot_2D_H (self,x_list,y_list,regressor,model,normal):
 
 		x_1=list()
 		for i in range (len(x_list)):
@@ -25,9 +25,10 @@ class Curve:
 		theta_0=regressor.intercept_
 		theta_1=theta [0]
 
-		#x=np.arange(-0.6,0.8,0.1)
-
-		x=np.arange(min(x_1),max(x_1),0.1)
+		if (normal==0):
+			x=np.arange(-0.6,0.8,0.1)
+		else:	
+			x=np.arange(min(x_1),max(x_1),0.1)
 
 		plt.plot(x,theta_0+x*theta_1,'r')
 
@@ -37,7 +38,7 @@ class Curve:
 		plt.show()
 
 	#The "plot_3D_H" method plots 3D-Hypothesis Graphic for the first two features of the Training-Set
-	def plot_3D_H (self,x_list,z_list,regressor,model):
+	def plot_3D_H (self,x_list,z_list,regressor,model,normal):
 		x_1=list()
 		for i in range (len(x_list)):
 			x_1.append(x_list[i][0])
@@ -54,10 +55,12 @@ class Curve:
 		theta_1=theta [0]
 		theta_2=theta[1]
 
-		#x_range= np.arange(-1,1,0.1)
-		#y_range= np.arange(-1,1,0.1)
-		x_range= np.arange(min(x_1),max(x_1),0.1)
-		y_range= np.arange(min(x_2),max(x_2),0.1)
+		if (normal==0):
+			x_range= np.arange(-1,1,0.1)
+			y_range= np.arange(-1,1,0.1)
+		else:
+			x_range= np.arange(min(x_1),max(x_1),0.1)
+			y_range= np.arange(min(x_2),max(x_2),0.1)
 
 		x,y=np.meshgrid(x_range,y_range)
 

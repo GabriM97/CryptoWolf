@@ -114,7 +114,7 @@ class Cleaner:
     # The save_mean_norm_info method saves on a plk file the maximum and the mean features value
     def save_mean_norm_info(self, closeP, timestamp, openP, highP, lowP, volume):
         plk_file = "{}_mean_norm_info.plk".format(self.period)
-        directory = "./lib/".format(self.filepath)
+        directory = "{}plk/".format(self.filepath)
 
         if not os.path.exists(directory):
             os.makedirs(directory)

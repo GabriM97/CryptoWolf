@@ -4,6 +4,8 @@ from Cleaner import Cleaner
 import time
 from cryptowolf_assets import *
 
+pca_v=False
+
 #We used ,here, the Cleaner class in order to load the normalization data
 obj = Cleaner ("bitstamp","btcusd","12-h")
 
@@ -54,13 +56,9 @@ if (result==7):
 #Here we load the pca object
 result=check_file("pca.plk")
 if (result==7):
-	pca = load_data("pca.plk")
-
-	if (pca==-1):
-		print ("Fatal Error, missing some data file \n")
-		exit(4)	
-
+	pca = load_data("pca.plk")	
 	pca=pca['pca']
+	pca_v=True
 
 
 
@@ -138,9 +136,10 @@ while (True):
 
 
 			input_prediction.append(candle)
-
-			#The learning was done using pca technique, for this reasing we apply pca as well in the input query
-			input_prediction=pca.transform(input_prediction)
+		
+			#If learning was done using pca technique, we apply pca as well in the input query
+			if (pca_v==True):
+				input_prediction=pca.transform(input_prediction)
 
 			#Here we make the prediction
 			prediction=estimator.predict(input_prediction)
