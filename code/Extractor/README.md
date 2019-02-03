@@ -1,3 +1,13 @@
+v1.1{
+	
+- Cleaner:
+	now Cleaner class saves into files the info about mean_normalization and feature_scaling.
+	added methods to open the files above.
+- tester: modified to test the Cleaner class.
+
+}
+
+
 v1.0{
 
 - Graph:

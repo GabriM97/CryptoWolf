@@ -101,10 +101,9 @@ def test_Dataset_Creator():
     period = "12-h"  # Has to respect the Periods_Maker class style
 
     creator = DC(exchange, pair)
-    training_set, test_set = creator.create_dataset(period, updated=True, cleaning_type=0)
+    training_set, test_set = creator.create_dataset(period, updated=True, cleaning_type=1)
     # It's possible to call create_dataset method with "period" parameter only, other parameters
     # will be initialized as default value "updated=True" and "cleaning_type=0"
-    print(training_set[1])
     
 # Plot the graph Timestamp vs ClosePrice  
 def test_Graph():
@@ -116,7 +115,30 @@ def test_Graph():
     graph = Graph(exchange, pair, period)
     graph.plotCryptoGraph()
     
+
+# Tests the Cleaner class
+def test_Cleaner():
+    # TEST CLASS CLEANER
+    exchange = "bitstamp"
+    pair = "btcusd"
+    period = "12-h"
     
+    cleaner1 = CLN(exchange, pair, period)
+    creator1 = DC(exchange, pair)
+    training_set, test_set = creator1.create_dataset(period, updated=True, cleaning_type=1)
+    closePrice, closeTime, openPrice, highPrice, lowPrice, volume = cleaner1.open_feature_scaling_max()
+    print("Feature Scaling info:")
+    print(closePrice, closeTime, openPrice, highPrice, lowPrice, volume)
+    
+    cleaner2 = CLN(exchange, pair, period)
+    creator2 = DC(exchange, pair)
+    training_set, test_set = creator2.create_dataset(period, updated=False, cleaning_type=2)
+    closePrice, closeTime, openPrice, highPrice, lowPrice, volume = cleaner2.open_mean_norm_info()
+    print("Mean Normalization info:")
+    print(closePrice, closeTime, openPrice, highPrice, lowPrice, volume)
+    
+    
+
 #  ------  MAIN  ------
 
 #test_tm_stmp_cnvrt()
@@ -124,5 +146,6 @@ def test_Graph():
 #test_Extractor()
 #test_JSON_Saver()
 #test_Dataset_Maker()
-test_Dataset_Creator()
-test_Graph()
+#test_Dataset_Creator()
+#test_Graph()
+test_Cleaner()

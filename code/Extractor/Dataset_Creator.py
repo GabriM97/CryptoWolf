@@ -42,7 +42,6 @@ class Dataset_Creator:
         dirty_dataset = self.make_dataset(self.period)
         #self.dataMaker.print_data(dirty_dataset)
         
-        
         if cleaning_type == 0:
             self.dataset = dirty_dataset
         elif cleaning_type == 1:

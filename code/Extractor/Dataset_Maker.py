@@ -102,8 +102,8 @@ class Dataset_Maker:
         if not os.path.exists(directory):
             os.makedirs(directory)
 
-        self.filepath = "{}{}".format(directory, plk_file)
-        with open(self.filepath, "wb") as out:
+        filepath = "{}{}".format(directory, plk_file)
+        with open(filepath, "wb") as out:
             pickle.dump({
                     'candlestick_matrix': candles,
                     'closePrice_matrix': closePrices,

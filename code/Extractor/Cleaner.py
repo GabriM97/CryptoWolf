@@ -6,6 +6,7 @@ This class clean the features with "Mean Normalization" and "Feature Scaling"
 import numpy as np
 import os
 import pickle
+from Periods_Maker import Periods_Maker as PM
 
 class Cleaner:
     
@@ -34,6 +35,8 @@ class Cleaner:
     def feature_scaling(self, dataset):
         closeP, timestamp, openP, highP, lowP, volume = self._getData(dataset)
         
+        self.save_feature_scaling_max(closeP, timestamp, openP, highP, lowP, volume)
+
         closeP = closeP/max(closeP)
         timestamp = timestamp/max(timestamp)
         openP = openP/max(openP)
@@ -46,11 +49,53 @@ class Cleaner:
         
         self.save(candles, closeP)
         return (closeP, candles)
+     
         
+    # The save_feature_scaling_max method saves on a plk file the maximum features value
+    def save_feature_scaling_max(self, closeP, timestamp, openP, highP, lowP, volume):
+        plk_file = "{}_feature_scaling_max.plk".format(self.period)
+        directory = "{}plk/".format(self.filepath)
+
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        filepath = "{}{}".format(directory, plk_file)
+        with open(filepath, "wb") as out:
+            pickle.dump({
+                    'closePrice': max(closeP),
+                    'closeTime': max(timestamp),
+                    'openPrice': max(openP),
+                    'highPrice': max(highP),
+                    'lowPrice': max(lowP),
+                    'volume': max(volume),
+            },out)
+    
+    
+    # The open_feature_scaling_max method returns the maximum feature values from the saved plk file 
+    def open_feature_scaling_max(self):
+        periodMaker = PM()
+        periods_list = periodMaker.ret_diz()
+        self.period = periods_list[self.period]
+        
+        filepath = "{}/{}/plk/{}_feature_scaling_max.plk".format(self.exchange, self.pair, self.period) 
+        with open(filepath, "rb") as inp:
+            fs_max = pickle.load(inp)
+            
+        closePrice = fs_max.get("closePrice")
+        closeTime = fs_max.get("closeTime")
+        openPrice = fs_max.get("openPrice")
+        highPrice = fs_max.get("highPrice")
+        lowPrice = fs_max.get("lowPrice")
+        volume = fs_max.get("volume")
+            
+        return closePrice, closeTime, openPrice, highPrice, lowPrice, volume
+    
     
     # The mean_normalization method returns (and saves on file) a new dataset with each normalized feature 
     def mean_normalization(self, dataset):
         closeP, timestamp, openP, highP, lowP, volume = self._getData(dataset)
+        
+        self.save_mean_norm_info(closeP, timestamp, openP, highP, lowP, volume)
         
         closeP = (closeP - int(closeP.mean())) / max(closeP)
         timestamp = (timestamp - int(timestamp.mean())) / max(timestamp)
@@ -64,6 +109,46 @@ class Cleaner:
         
         self.save(candles, closeP)
         return (closeP, candles)
+    
+    
+    # The save_mean_norm_info method saves on a plk file the maximum and the mean features value
+    def save_mean_norm_info(self, closeP, timestamp, openP, highP, lowP, volume):
+        plk_file = "{}_mean_norm_info.plk".format(self.period)
+        directory = "{}plk/".format(self.filepath)
+
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        filepath = "{}{}".format(directory, plk_file)
+        with open(filepath, "wb") as out:
+            pickle.dump({
+                    'closePrice': (max(closeP), int(closeP.mean())),
+                    'closeTime': (max(timestamp), int(timestamp.mean())),
+                    'openPrice': (max(openP), int(openP.mean())),
+                    'highPrice': (max(highP), int(highP.mean())),
+                    'lowPrice': (max(lowP), int(lowP.mean())),
+                    'volume': (max(volume), int(volume.mean())),
+            },out)
+    
+    
+    # The open_mean_norm_info method returns tuples of the maximum and the mean feature values from the saved plk file
+    def open_mean_norm_info(self):
+        periodMaker = PM()
+        periods_list = periodMaker.ret_diz()
+        self.period = periods_list[self.period]
+        
+        filepath = "{}/{}/plk/{}_mean_norm_info.plk".format(self.exchange, self.pair, self.period) 
+        with open(filepath, "rb") as inp:
+            fs_max = pickle.load(inp)
+            
+        closePrice = fs_max.get("closePrice")
+        closeTime = fs_max.get("closeTime")
+        openPrice = fs_max.get("openPrice")
+        highPrice = fs_max.get("highPrice")
+        lowPrice = fs_max.get("lowPrice")
+        volume = fs_max.get("volume")
+            
+        return closePrice, closeTime, openPrice, highPrice, lowPrice, volume
         
 
     # The save method creates the filepath and saves the scaled dataset on a ".plk" file. It will create directories if the filepath doesn't exists
@@ -74,8 +159,8 @@ class Cleaner:
         if not os.path.exists(directory):
             os.makedirs(directory)
 
-        self.filepath = "{}{}".format(directory, plk_file)
-        with open(self.filepath, "wb") as out:
+        filepath = "{}{}".format(directory, plk_file)
+        with open(filepath, "wb") as out:
             pickle.dump({
                     'candlestick_matrix': candles,
                     'closePrice_matrix': closePrices,
