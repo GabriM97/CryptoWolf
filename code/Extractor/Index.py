@@ -134,22 +134,3 @@ class Index:
         smg.plot_corr(corr, xnames=["Open Price", "Close Price"], normcolor=True)
         plt.show()
         
-
-        
-idx = Index("bitstamp", "btcusd", "12-h")
-candle_matrix, closePrice_matrix = idx.create_matrix()
-#print("Candle matrix:\n", candle_matrix)
-#print("Close Price matrix:\n", closePrice_matrix)
-#print("Candle matrix shape: ", candle_matrix.shape)
-#print("Close Price matrix shape: ", closePrice_matrix.shape)
-#print("Open Price Column:\n", candle_matrix[:,2])
-#print("Open Price Column shape: ", candle_matrix[:,2].shape)
-openPrice_ar, closePrice_ar = idx.create_np_array(candle_matrix, closePrice_matrix)
-print("Check openPrice_ar and candle_matrix: ", openPrice_ar == candle_matrix[:,2]) #EXPECTED true
-print("Check closePrice_ar and closePrice_matrix: ", closePrice_ar == closePrice_matrix) #EXPECTED true
-print("openPrice_ar shape: ", openPrice_ar.shape)
-print("closePrice_ar: ", closePrice_ar.shape)
-op_mean, cp_mean, op_q0, op_q1, op_q2, op_q3, op_q4, cp_q0, cp_q1, cp_q2, cp_q3, cp_q4, corrMatrix = idx.index(openPrice_ar, closePrice_ar)
-idx.print_dotplot(openPrice_ar, closePrice_ar, op_mean, cp_mean, op_q0, op_q1, op_q2, op_q3, op_q4, cp_q0, cp_q1, cp_q2, cp_q3, cp_q4)
-idx.scatterplot(openPrice_ar, closePrice_ar)
-idx.correlationMatrix(corrMatrix)
