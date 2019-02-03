@@ -6,7 +6,7 @@ from Trainer import Trainer
 from sklearn.decomposition import PCA 
 from sklearn.metrics import mean_absolute_error
 import pickle
-
+from Dataset_Projector import Dataset_Projector
 
 #THIS FUNCTION SAVES THE PCA OBJECT INTO A PLK FILE
 def save_pca (pca):
@@ -139,10 +139,13 @@ print ("The best Model is Model Number {} - Validation Error Rounded: {} Validat
 
 
 print ("\n\n********************FINAL-ERROR********************\n")
-#ALGORITHM ERROR	
+#ALGORITHM ERROR
+projector=Dataset_Projector()
+X_test=	projector.to_project(X_test,list_of_models[tr.index_of_best_model])
 pred_test=tr.best_model.predict (X_test)
 error = mean_absolute_error(pred_test, Y_test)
 print ("Final Error of the Algorithm: {} \n".format(error))
+
 
 #SAVE PCA
 if (pca_apply==1):

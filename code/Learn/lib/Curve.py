@@ -26,7 +26,8 @@ class Curve:
 		theta_1=theta [0]
 
 		if (normal==0):
-			x=np.arange(-0.6,0.8,0.1)
+			#x=np.arange(-0.6,0.8,0.1)
+			x=np.arange(0.0, 5000, 100.0)
 		else:	
 			x=np.arange(min(x_1),max(x_1),0.1)
 
@@ -56,8 +57,10 @@ class Curve:
 		theta_2=theta[1]
 
 		if (normal==0):
-			x_range= np.arange(-1,1,0.1)
-			y_range= np.arange(-1,1,0.1)
+			#x_range= np.arange(-1,1,0.1)
+			#y_range= np.arange(-1,1,0.1)
+			x_range=np.arange(0.0, 5000, 100.0)
+			y_range=np.arange(0.0, 5000, 100.0)
 		else:
 			x_range= np.arange(min(x_1),max(x_1),0.1)
 			y_range= np.arange(min(x_2),max(x_2),0.1)
