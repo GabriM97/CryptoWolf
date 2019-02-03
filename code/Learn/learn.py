@@ -11,7 +11,7 @@ from sklearn.metrics import mean_absolute_error
 d = Dataset_Creator ("bitstamp","btcusd")
 period="12-h"
 
-training_set, test_set = d.create_dataset(period)
+training_set, test_set = d.create_dataset(period,True,1)
 
 X_train=training_set[0]
 Y_train=training_set[1]

@@ -26,8 +26,9 @@ class Dataset_Creator:
 
 
     # The create_dataset method allows to create and save a clean dataset. It returns training-set and test-set.
-    # Insert cleaning_type=0 (default) to apply a FEATURE SCALING cleaning type
-    # Insert cleaning_type=1 to apply a MEAN NORMALIZATION cleaning type
+    # Insert cleaning_type=0 (default) to NOT apply cleaning type
+    # Insert cleaning_type=1 to apply a FEATURE SCALING cleaning type
+    # Insert cleaning_type=2 to apply a MEAN NORMALIZATION cleaning type
     # The parameter "updated" if it's "True" (default) will download new candlesticks used for the Dataset
     # If it's "False" will create the dataset with the last downloaded candlesticks
     def create_dataset(self, period, updated=True, cleaning_type=0):
@@ -42,12 +43,15 @@ class Dataset_Creator:
         #self.dataMaker.print_data(dirty_dataset)
         
         if cleaning_type == 0:
-            self.dataset = self.clean.feature_scaling(dirty_dataset)
+            self.dataset = dirty_dataset
         elif cleaning_type == 1:
+            self.dataset = self.clean.feature_scaling(dirty_dataset)
+        elif cleaning_type == 2:
             self.dataset = self.clean.mean_normalization(dirty_dataset)
         else:
             print("\nValue of cleaning_type error. Dafault cleaning will be applied.")
             self.dataset = self.clean.feature_scaling(dirty_dataset)
+        
         
         X_train, X_test, y_train, y_test = self.split_and_save(self.dataset, 0.30)
         
