@@ -5,6 +5,17 @@ from Model_Printer import Model_Printer
 from Trainer import Trainer
 from sklearn.decomposition import PCA 
 from sklearn.metrics import mean_absolute_error
+import pickle
+
+#THIS FUNCTION SAVES THE PCA OBJECT INTO A PLK FILE
+def save_pca (pca):
+	plk = "pca.plk"
+	direc = "./"
+	
+	filepath = "{}{}".format(direc,plk)
+
+	with open (filepath,"wb") as out:
+		pickle.dump ( { 'pca':pca } ,out)
 
 
 #DOWNLOADING DATA AND DATASET BUILDING AND SPLITTING
@@ -53,4 +64,8 @@ print ("The best Model is Model Number {} - Validation Error Rounded: {} Validat
 pred_test=tr.best_model.predict (X_test_pca)
 error = mean_absolute_error(pred_test, Y_test)
 print ("Final Error of the Algorithm: {} ".format(error))
+
+
+#SAVE PCA
+save_pca(pca)
 

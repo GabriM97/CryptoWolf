@@ -115,7 +115,7 @@ def test_Graph():
     graph = Graph(exchange, pair, period)
     graph.plotCryptoGraph()
     
-
+"""
 # Tests the Cleaner class
 def test_Cleaner():
     # TEST CLASS CLEANER
@@ -136,7 +136,7 @@ def test_Cleaner():
     closePrice, closeTime, openPrice, highPrice, lowPrice, volume = cleaner2.open_mean_norm_info()
     print("Mean Normalization info:")
     print(closePrice, closeTime, openPrice, highPrice, lowPrice, volume)
-    
+"""    
     
 
 #  ------  MAIN  ------
@@ -146,6 +146,6 @@ def test_Cleaner():
 #test_Extractor()
 #test_JSON_Saver()
 #test_Dataset_Maker()
-#test_Dataset_Creator()
+test_Dataset_Creator()
 #test_Graph()
-test_Cleaner()
+#test_Cleaner()

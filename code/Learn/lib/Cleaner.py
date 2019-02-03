@@ -76,8 +76,8 @@ class Cleaner:
         periodMaker = PM()
         periods_list = periodMaker.ret_diz()
         self.period = periods_list[self.period]
-        
-        filepath = "{}/{}/plk/{}_feature_scaling_max.plk".format(self.exchange, self.pair, self.period) 
+	
+        filepath = "./lib/{}_feature_scaling_max.plk".format(self.period) 
         with open(filepath, "rb") as inp:
             fs_max = pickle.load(inp)
             
@@ -114,7 +114,7 @@ class Cleaner:
     # The save_mean_norm_info method saves on a plk file the maximum and the mean features value
     def save_mean_norm_info(self, closeP, timestamp, openP, highP, lowP, volume):
         plk_file = "{}_mean_norm_info.plk".format(self.period)
-        directory = "{}plk/".format(self.filepath)
+        directory = "./lib/".format(self.filepath)
 
         if not os.path.exists(directory):
             os.makedirs(directory)
@@ -137,7 +137,7 @@ class Cleaner:
         periods_list = periodMaker.ret_diz()
         self.period = periods_list[self.period]
         
-        filepath = "{}/{}/plk/{}_mean_norm_info.plk".format(self.exchange, self.pair, self.period) 
+        filepath = "./lib/{}_mean_norm_info.plk".format(self.period) 
         with open(filepath, "rb") as inp:
             fs_max = pickle.load(inp)
             
