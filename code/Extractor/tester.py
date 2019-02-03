@@ -6,6 +6,7 @@ from Periods_Maker import Periods_Maker as PM
 from Dataset_Creator import Dataset_Creator as DC
 from Cleaner import Cleaner as CLN
 from Graph import Graph
+from Index import Index
 
 def test_tm_stmp_cnvrt():
     #TEST CLASS TIME_STAMP_CONVERTER
@@ -89,7 +90,7 @@ def test_Dataset_Maker():
     
     dataMaker = DataMak(exchange, pair)
     dataset = dataMaker.load_json_candlestick(period)
-    dataMaker.print_datas(dataset)
+    dataMaker.print_data(dataset)
     dataMaker.save_on_file(dataset)
 
 
@@ -115,7 +116,7 @@ def test_Graph():
     graph = Graph(exchange, pair, period)
     graph.plotCryptoGraph()
     
-"""
+
 # Tests the Cleaner class
 def test_Cleaner():
     # TEST CLASS CLEANER
@@ -136,16 +137,36 @@ def test_Cleaner():
     closePrice, closeTime, openPrice, highPrice, lowPrice, volume = cleaner2.open_mean_norm_info()
     print("Mean Normalization info:")
     print(closePrice, closeTime, openPrice, highPrice, lowPrice, volume)
-"""    
+    
+def test_Index():
+    idx = Index("bitstamp", "btcusd", "12-h")
+    candle_matrix, closePrice_matrix = idx.create_matrix()
+    #print("Candle matrix:\n", candle_matrix)
+    #print("Close Price matrix:\n", closePrice_matrix)
+    #print("Candle matrix shape: ", candle_matrix.shape)
+    #print("Close Price matrix shape: ", closePrice_matrix.shape)
+    #print("Open Price Column:\n", candle_matrix[:,2])
+    #print("Open Price Column shape: ", candle_matrix[:,2].shape)
+    openPrice_ar, closePrice_ar = idx.create_np_array(candle_matrix, closePrice_matrix)
+    print("Check openPrice_ar and candle_matrix: ", openPrice_ar == candle_matrix[:,2]) #EXPECTED true
+    print("Check closePrice_ar and closePrice_matrix: ", closePrice_ar == closePrice_matrix) #EXPECTED true
+    print("openPrice_ar shape: ", openPrice_ar.shape)
+    print("closePrice_ar: ", closePrice_ar.shape)
+    op_mean, cp_mean, op_q0, op_q1, op_q2, op_q3, op_q4, cp_q0, cp_q1, cp_q2, cp_q3, cp_q4, corrMatrix = idx.index(openPrice_ar, closePrice_ar)
+    idx.print_dotplot(openPrice_ar, closePrice_ar, op_mean, cp_mean, op_q0, op_q1, op_q2, op_q3, op_q4, cp_q0, cp_q1, cp_q2, cp_q3, cp_q4)
+    idx.scatterplot(openPrice_ar, closePrice_ar)
+    idx.correlationMatrix(corrMatrix)
+    
     
 
 #  ------  MAIN  ------
 
-#test_tm_stmp_cnvrt()
-#test_Period_Maker()
-#test_Extractor()
-#test_JSON_Saver()
-#test_Dataset_Maker()
+test_tm_stmp_cnvrt()
+test_Period_Maker()
+test_Extractor()
+test_JSON_Saver()
+test_Dataset_Maker()
 test_Dataset_Creator()
-#test_Graph()
-#test_Cleaner()
+test_Graph()
+test_Cleaner()
+test_Index()
