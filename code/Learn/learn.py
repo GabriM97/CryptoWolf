@@ -29,10 +29,10 @@ model_list_complete=0
 pca_apply=1
 try:	
 
-	print ("\n\n********************Paramiters Choices********************\n")
+	print ("\n\n********************TRAINING-SETUP********************\n")
 
 
-	print ("1) Update Data ?\n Insert: \n -> 0 - Use local data  \n -> 1 - Update data from the internet")
+	print ("1) Download/Update Data ?\n Insert: \n -> 0 - Use local data  \n -> 1 - Update data from the internet")
 	answer=int(input ("\n -> "))
 	if ((answer !=0) and (answer!=1)):
 		print ("Error, you have to insert 0 or 1")

@@ -54,12 +54,13 @@ class Cleaner:
     # The save_feature_scaling_max method saves on a plk file the maximum features value
     def save_feature_scaling_max(self, closeP, timestamp, openP, highP, lowP, volume):
         plk_file = "{}_feature_scaling_max.plk".format(self.period)
-        directory = "{}plk/".format(self.filepath)
+        #directory = "{}plk/".format(self.filepath)
+        directory = "./lib"
 
         if not os.path.exists(directory):
             os.makedirs(directory)
 
-        filepath = "{}{}".format(directory, plk_file)
+        filepath = "{}/{}".format(directory, plk_file)
         with open(filepath, "wb") as out:
             pickle.dump({
                     'closePrice': max(closeP),
@@ -114,12 +115,13 @@ class Cleaner:
     # The save_mean_norm_info method saves on a plk file the maximum and the mean features value
     def save_mean_norm_info(self, closeP, timestamp, openP, highP, lowP, volume):
         plk_file = "{}_mean_norm_info.plk".format(self.period)
-        directory = "{}plk/".format(self.filepath)
+        #directory = "{}plk/".format(self.filepath)
+        directory = "./lib"
 
         if not os.path.exists(directory):
             os.makedirs(directory)
 
-        filepath = "{}{}".format(directory, plk_file)
+        filepath = "{}/{}".format(directory, plk_file)
         with open(filepath, "wb") as out:
             pickle.dump({
                     'closePrice': (max(closeP), int(closeP.mean())),

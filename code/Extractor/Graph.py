@@ -45,4 +45,4 @@ class Graph:
         plt.xlabel("Timestamp")
         plt.ylabel("Price $")
         plt.title("{} Chart".format(self.pair.upper()))
-    
+        plt.show()
