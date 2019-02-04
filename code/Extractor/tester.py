@@ -115,7 +115,7 @@ def test_Graph():
     period = "12-h"
     
     creator = DC(exchange, pair)
-    training_set, test_set = creator.create_dataset(period, updated=False, cleaning_type=0)
+    training_set, test_set = creator.create_dataset(period, updated=True, cleaning_type=0)
     
     graph = Graph(exchange, pair, period)
     graph.plotCryptoChart()
@@ -170,7 +170,7 @@ def test_Index():
 #test_Extractor()
 #test_JSON_Saver()
 #test_Dataset_Maker()
-#test_Dataset_Creator()
+test_Dataset_Creator()
 test_Graph()
-#test_Cleaner()
-#test_Index()   #Before testing Index class, create the Dataset (run test_Dataset_Creator())
+test_Cleaner()
+test_Index()   #Before testing Index class, create the Dataset (run test_Dataset_Creator())
