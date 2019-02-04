@@ -105,6 +105,7 @@ def test_Dataset_Creator():
     training_set, test_set = creator.create_dataset(period, updated=True, cleaning_type=1)
     # It's possible to call create_dataset method with "period" parameter only, other parameters
     # will be initialized as default value "updated=True" and "cleaning_type=0"
+    print("\n")
     
 # Plot the graph Timestamp vs ClosePrice  
 def test_Graph():
@@ -113,8 +114,11 @@ def test_Graph():
     pair = "btcusd"
     period = "12-h"
     
+    creator = DC(exchange, pair)
+    training_set, test_set = creator.create_dataset(period, updated=False, cleaning_type=0)
+    
     graph = Graph(exchange, pair, period)
-    graph.plotCryptoGraph()
+    graph.plotCryptoChart()
     
 
 # Tests the Cleaner class
@@ -161,12 +165,12 @@ def test_Index():
 
 #  ------  MAIN  ------
 
-test_tm_stmp_cnvrt()
-test_Period_Maker()
-test_Extractor()
-test_JSON_Saver()
-test_Dataset_Maker()
-test_Dataset_Creator()
+#test_tm_stmp_cnvrt()
+#test_Period_Maker()
+#test_Extractor()
+#test_JSON_Saver()
+#test_Dataset_Maker()
+#test_Dataset_Creator()
 test_Graph()
-test_Cleaner()
-test_Index()
+#test_Cleaner()
+#test_Index()   #Before testing Index class, create the Dataset (run test_Dataset_Creator())

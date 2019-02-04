@@ -1,7 +1,5 @@
 """
-
 This class allows to plot the chart CloseTime vs ClosePrice
-
 
 """
 
@@ -28,7 +26,7 @@ class Graph:
         return dataset
     
     # The plotCryptoGraph method plots the graph Timestamp vs ClosePrice
-    def plotCryptoGraph(self):
+    def plotCryptoChart(self):
         plt.figure(figsize=(15,5))
         plt.subplot(1,1,1)
         
@@ -36,7 +34,14 @@ class Graph:
         closeTime = dataset.get("candlestick_matrix")[:,0]
         closePrice = dataset.get("closePrice_matrix")
         
-        plt.plot(closeTime, closePrice)
+        plt.plot(closeTime, closePrice, linewidth=1, c='blue', label="BTC Price")
+        frame = plt.gca()
+        plt.legend(loc='upper left')
+        
+        plt.grid(True)
+        plt.rc('grid', linestyle=":", linewidth=1, color='gray')
+        
+        frame.axes.get_xaxis().set_visible(False)
         plt.xlabel("Timestamp")
         plt.ylabel("Price $")
         plt.title("{} Chart".format(self.pair.upper()))

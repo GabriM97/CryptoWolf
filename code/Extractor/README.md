@@ -1,4 +1,14 @@
-v1.1{
+v.1.0.2{
+
+- Graph: the name of "plotCryptoGraph" method has been changed to "plotCryptoChart". Other small changes to the graph.
+- Cleaner: Now "save_mean_norm_info" and "save_feature_scaling_max" methods saves in the correct path.
+- Dataset_Maker: improved dataset.
+- Tester: Modified test_Graph method to work properly.
+
+}
+
+
+v1.0.1{
 	
 - Cleaner:
 	now Cleaner class saves into files the info about mean_normalization and feature_scaling.
@@ -8,7 +18,7 @@ v1.1{
 }
 
 
-v1.0{
+v1.0.0{
 
 - Graph:
 	created class Graph. It plts CloseTime vs ClosePrice

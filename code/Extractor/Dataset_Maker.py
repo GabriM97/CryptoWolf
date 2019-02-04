@@ -25,17 +25,20 @@ class Dataset_Maker:
         self.period = period
         data = self.extract()
         candles = data[self.period]
-
+        
         candles_matrix = list()
         close_matrix = []
-
+        
         for i in range(len(candles)):
-            row, closePrice = self._make_data(candles,i)
-            candles_matrix.append(row)
-            close_matrix.append(closePrice)
-            
-            np_candles_matrix = np.array(candles_matrix)
-            np_close_matrix = np.array(close_matrix)
+            if(not (candles[i][4] == 0)):
+                row, closePrice = self._make_data(candles,i)
+                candles_matrix.append(row)
+                close_matrix.append(closePrice)
+                
+                np_candles_matrix = np.array(candles_matrix)
+                np_close_matrix = np.array(close_matrix)
+            #else:
+            #    print("Skipped:", candles[i])
 
         self.container = (np_close_matrix, np_candles_matrix)
         return self.container
@@ -107,4 +110,4 @@ class Dataset_Maker:
             pickle.dump({
                     'candlestick_matrix': candles,
                     'closePrice_matrix': closePrices,
-            },out)
+            },out) 
