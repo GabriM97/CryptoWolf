@@ -1,17 +1,11 @@
 import sys  
 sys.path.append('./lib')  
-from Cleaner import Cleaner
 import time
 from cryptowolf_assets import *
 from Time_Stamp_Converter import Time_Stamp_Converter
 from Extractor import Extractor
 from Dataset_Projector import Dataset_Projector 
 pca_v=False
-
-#We used ,here, the Cleaner class in order to load the normalization data
-obj = Cleaner ("bitstamp","btcusd","12-h")
-
-
 
 #Here we load the estimator features
 target_features = load_data("best_model_features.pkl")
@@ -31,28 +25,6 @@ if (estimator == -1):
 	exit(5)
 
 estimator=estimator['Best_M']
-
-
-
-#This variable signals what is the Normalization Level (None, Feature_Scaling, Mean Normalization)
-normalization_level=0
-
-
-
-#Here we try to load feature scaling information
-result=check_file("43200_feature_scaling_max.plk")
-if (result==7):
-	normalization_level=1
-	pack = obj.open_feature_scaling_max()
-
-
-
-#Here we try to load mean normalization information (of course feature scaling excludes mean normalization and vice versa)
-result=check_file("43200_mean_norm_info.plk")
-if (result==7):
-	normalization_level=2
-	pack = obj.open_mean_norm_info()
-
 
 
 #Here we load the pca object
@@ -93,13 +65,6 @@ else:
 	daily_prediction=list()
 	pr=pr[0]
 
-	#If was applied normalization in the learning phase we need to apply it as well in the input query
-	if (normalization_level==1):
-		candle=normal_2_feature_scaling(pr,pack,target_features)
-
-	if (normalization_level==2):
-		candle=normal_2_mean_normalization(pr,pack,target_features)
-
 	daily_prediction.append(pr)
 		
 	#If learning was done using pca technique, we apply pca as well in the input query
@@ -108,13 +73,6 @@ else:
 
 	#Here we make the prediction
 	daily_prediction=estimator.predict(daily_prediction)
-	
-	#If we perform some trasformation on the input query, we need to return back in order to show a coherent result to the user
-	if (normalization_level==1):
-		daily_prediction=feature_scaling_2_normal (daily_prediction,pack,target_features)
-
-	if (normalization_level==2):
-		daily_prediction=mean_normalization_2_normal (daily_prediction,pack,target_features)
 	
 	print ("The Predicted ClosePrice is {} \n".format(float(daily_prediction)))
  
@@ -225,15 +183,6 @@ while (True):
 
 			input_prediction=list()
 
-				
-			#If was applied normalization in the learning phase we need to apply it as well in the input query
-			if (normalization_level==1):
-				candle=normal_2_feature_scaling(candle,pack,target_features)
-
-			if (normalization_level==2):
-				candle=normal_2_mean_normalization(candle,pack,target_features)
-
-
 			input_prediction.append(candle)
 			
 			#If learning was done using pca technique, we apply pca as well in the input query
@@ -242,13 +191,6 @@ while (True):
 
 			#Here we make the prediction
 			prediction=estimator.predict(input_prediction)
-
-			#If we perform some trasformation on the input query, we need to return back in order to show a coherent result to the user
-			if (normalization_level==1):
-				prediction=feature_scaling_2_normal (prediction,pack,target_features)
-
-			if (normalization_level==2):
-				prediction=mean_normalization_2_normal (prediction,pack,target_features)
 
 
 			print ("\n\nThe predicted ClosePrice is {} ".format(float(prediction))) 

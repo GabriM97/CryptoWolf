@@ -120,28 +120,6 @@ def test_Graph():
     graph = Graph(exchange, pair, period)
     graph.plotCryptoChart()
     
-
-# Tests the Cleaner class
-def test_Cleaner():
-    # TEST CLASS CLEANER
-    exchange = "bitstamp"
-    pair = "btcusd"
-    period = "12-h"
-    
-    cleaner1 = CLN(exchange, pair, period)
-    creator1 = DC(exchange, pair)
-    training_set, test_set = creator1.create_dataset(period, updated=True, cleaning_type=1)
-    closePrice, closeTime, openPrice, highPrice, lowPrice, volume = cleaner1.open_feature_scaling_max()
-    print("Feature Scaling info:")
-    print(closePrice, closeTime, openPrice, highPrice, lowPrice, volume)
-    
-    cleaner2 = CLN(exchange, pair, period)
-    creator2 = DC(exchange, pair)
-    training_set, test_set = creator2.create_dataset(period, updated=False, cleaning_type=2)
-    closePrice, closeTime, openPrice, highPrice, lowPrice, volume = cleaner2.open_mean_norm_info()
-    print("Mean Normalization info:")
-    print(closePrice, closeTime, openPrice, highPrice, lowPrice, volume)
-    
 def test_Index():
     idx = Index("bitstamp", "btcusd", "12-h")
     candle_matrix, closePrice_matrix = idx.create_matrix()
@@ -172,5 +150,4 @@ def test_Index():
 #test_Dataset_Maker()
 test_Dataset_Creator()
 test_Graph()
-test_Cleaner()
 test_Index()   #Before testing Index class, create the Dataset (run test_Dataset_Creator())

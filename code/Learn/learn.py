@@ -24,7 +24,6 @@ print ("\n\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LEARN>>>>>>>>>>>>>>>>>>>>>>\n")
 #PARIMITERS CHOICES
 graph=False
 update=True
-normalization=0
 model_list_complete=0
 pca_apply=1
 try:	
@@ -49,17 +48,7 @@ try:
 	graph=answer
 	print("")
 
-
-	print ("3) Apply normalizzation ?\n Insert: \n -> 0 - Do not apply normalization\n -> 1 - Apply Features Scaling\n -> 2 - Apply Mean Normalization")
-	answer=int(input ("\n -> "))
-	if (answer !=0 and answer!=1 and answer !=2):
-		print ("Error, you have to insert 0,1 or 2")
-		exit (3)
-	normalization=answer
-	print("")
-
-
-	print ("4) Do you want the full model list (144 models) for the Training ?\n Insert: \n -> 0 - No, use restricted list\n -> 1 - Yes, use Full List\n")
+	print ("3) Do you want the full model list (144 models) for the Training ?\n Insert: \n -> 0 - No, use restricted list\n -> 1 - Yes, use Full List\n")
 	answer=int(input ("\n -> "))
 	if (answer !=0 and answer!=1):
 		print ("Error, you have to insert 0,1 or 2")
@@ -68,7 +57,7 @@ try:
 	print("")
 
 
-	print ("5) Do you want to apply the pca on the dataset?\n Insert: \n -> 0 - No, don't apply it\n -> 1 - Yes, apply PCA\n")
+	print ("4) Do you want to apply the pca on the dataset?\n Insert: \n -> 0 - No, don't apply it\n -> 1 - Yes, apply PCA\n")
 	answer=int(input ("\n -> "))
 	if (answer !=0 and answer!=1):
 		print ("Error, you have to insert 0,1 or 2")
@@ -87,7 +76,7 @@ print ("\n\n********************DATASET-BUILDING-AND-SPLITTING******************
 d = Dataset_Creator ("bitstamp","btcusd")
 period="12-h"
 
-training_set, test_set = d.create_dataset(period,update,normalization)
+training_set, test_set = d.create_dataset(period,update)
 
 X_train=training_set[0]
 Y_train=training_set[1]

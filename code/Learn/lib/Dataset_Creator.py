@@ -8,7 +8,6 @@ With this object it's possible generate datasets for each passed period via para
 from JSON_Saver import JSON_Saver as JSave
 from Dataset_Maker import Dataset_Maker as DM
 from Periods_Maker import Periods_Maker as PM
-from Cleaner import Cleaner as CLN
 from sklearn.model_selection import train_test_split
 import os
 import pickle
@@ -31,10 +30,9 @@ class Dataset_Creator:
     # Insert cleaning_type=2 to apply a MEAN NORMALIZATION cleaning type
     # The parameter "updated" if it's "True" (default) will download new candlesticks used for the Dataset
     # If it's "False" will create the dataset with the last downloaded candlesticks
-    def create_dataset(self, period, updated=True, cleaning_type=0):
+    def create_dataset(self, period, updated=True):
         periods_list = self.periodMaker.ret_diz()
         self.period = periods_list[period]
-        self.clean = CLN(self.exchange, self.pair, self.period)
         
         if updated:
             self.save_json()
@@ -42,18 +40,10 @@ class Dataset_Creator:
         dirty_dataset = self.make_dataset(self.period)
         #self.dataMaker.print_data(dirty_dataset)
         
-        if cleaning_type == 0:
-            self.dataset = dirty_dataset
-        elif cleaning_type == 1:
-            self.dataset = self.clean.feature_scaling(dirty_dataset)
-        elif cleaning_type == 2:
-            self.dataset = self.clean.mean_normalization(dirty_dataset)
-        else:
-            print("\nValue of cleaning_type error. Dafault cleaning will be applied.")
-            self.dataset = self.clean.feature_scaling(dirty_dataset)
-        
-        
-        X_train, X_test, y_train, y_test = self.split_and_save(self.dataset, 0.30)
+
+        self.dataset = dirty_dataset
+       
+        X_train, X_test, y_train, y_test = self.split_and_save(self.dataset, 0.33)
         
         return (X_train, y_train), (X_test, y_test)
     

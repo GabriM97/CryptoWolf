@@ -48,7 +48,7 @@ class Cleaner:
         candles = tmp_candles.T
         
         self.save(candles, closeP)
-        return (closeP, candles)
+        return (candles)
      
         
     # The save_feature_scaling_max method saves on a plk file the maximum features value
@@ -109,7 +109,7 @@ class Cleaner:
         candles = tmp_candles.T
         
         self.save(candles, closeP)
-        return (closeP, candles)
+        return (candles)
     
     
     # The save_mean_norm_info method saves on a plk file the maximum and the mean features value
