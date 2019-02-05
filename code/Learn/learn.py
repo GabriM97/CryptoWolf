@@ -56,14 +56,16 @@ try:
 	model_list_complete=answer
 	print("")
 
-
-	print ("4) Do you want to apply the pca on the dataset?\n Insert: \n -> 0 - No, don't apply it\n -> 1 - Yes, apply PCA\n")
-	answer=int(input ("\n -> "))
-	if (answer !=0 and answer!=1):
-		print ("Error, you have to insert 0,1 or 2")
-		exit (3)
-	pca_apply=answer
-	print("")
+	if (graph==True and model_list_complete==1):
+		pca_apply=0
+	else:	
+		print ("4) Do you want to apply the pca on the dataset?\n Insert: \n -> 0 - No, don't apply it\n -> 1 - Yes, apply PCA\n")
+		answer=int(input ("\n -> "))
+		if (answer !=0 and answer!=1):
+			print ("Error, you have to insert 0,1 or 2")
+			exit (3)
+		pca_apply=answer
+		print("")
 
 
 except ValueError:
