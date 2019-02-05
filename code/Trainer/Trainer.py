@@ -133,19 +133,19 @@ class Trainer:
 			pickle.dump({'Best_M':self.best_model,},out)
 
 	#The plot_graphics method plots the Hypothesis Graphic (2D/3D) for every Model in the last training and the "Degree vs Error " Graphic if it is needed 
-	def plot_graphics (self,normaliz):
+	def plot_graphics (self):
 		obj=Curve()
 		self.take_the_best_model_from_last_training()
 
 		for i in range (len(self.list_of_projected_dataset)):
-			obj.plot_2D_H (self.list_of_projected_dataset[i],self.y,self.regressors[i][self.best_est[i]],i+1,normaliz)
+			obj.plot_2D_H (self.list_of_projected_dataset[i],self.y,self.regressors[i][self.best_est[i]],i+1)
 			
 		
 		for i in range (len(self.models)):
 			vb=list(self.list_of_projected_dataset[i])
 			vb=list(vb[0])
 			if (len(vb)>=2):
-				obj.plot_3D_H (self.list_of_projected_dataset[i],self.y,self.regressors[i][self.best_est[i]],i+1,normaliz)
+				obj.plot_3D_H (self.list_of_projected_dataset[i],self.y,self.regressors[i][self.best_est[i]],i+1)
 
 		if (len(self.rec_deg)>0):
 			for i in range (len(self.rec_deg)):

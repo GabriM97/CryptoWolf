@@ -74,7 +74,7 @@ else:
 	#Here we make the prediction
 	daily_prediction=estimator.predict(daily_prediction)
 	
-	print ("The Predicted ClosePrice is {} \n".format(float(daily_prediction)))
+	print ("The Predicted ClosePrice is ${} \n".format(round(float(daily_prediction),2)))
  
 
 
@@ -193,7 +193,7 @@ while (True):
 			prediction=estimator.predict(input_prediction)
 
 
-			print ("\n\nThe predicted ClosePrice is {} ".format(float(prediction))) 
+			print ("\n\nThe predicted ClosePrice is ${} ".format(round(float(prediction),2))) 
 			
 		#Case Exit	
 		elif (choose==2):

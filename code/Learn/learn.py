@@ -114,7 +114,7 @@ tr=Trainer ()
 
 tr.train_models(X_train,Y_train,list_of_models)
 if (graph==True):
-	tr.plot_graphics(normalization)
+	tr.plot_graphics()
 
 
 print ("\n\n********************TRAINING-ERROS********************\n")
