@@ -58,7 +58,20 @@ else:
 	del (pr[0][4]) #We delete the temporary candle ClosePrice
 	del (pr[0][5]) #We delete the last feature because it isn't documented in the CryptoWatch API
 	print ("\n\n*******************CRYPTOWOLF-DAILY-CANDLE-PREDICTION*******************\n")
-	print ("Daily Opened Candle: \n\n {} \n".format(pr[0]))
+	print ("Daily Opened Candle: {} \n".format(pr[0]))
+	print ("Summary Daily Opened Candle: \n")
+	for i in range (5):
+		if (i==0):
+			print ("-> CloseTime (timestamp): {}".format(pr[0][i]))
+		elif (i==1):
+			print ("-> OpenPrice: ${}".format(pr[0][i]))
+		elif(i==2):
+			print ("-> HighPrice: ${}".format(pr[0][i]))
+		elif (i==3):
+			print ("-> LowPrice: ${}".format(pr[0][i]))
+		elif (i==4):
+			print ("-> Volume: {}\n".format(pr[0][i]))
+		
 
 	projector=Dataset_Projector()
 	pr=projector.to_project (pr,target_features)
@@ -177,8 +190,29 @@ while (True):
 				candle.append(volume)
 				print("")
 
+			counter=0
+			print ("Candle Inserted: {} \n".format(candle))
+			print ("Summary Candle Inserted: \n")
+			for i in range (5):
+				if (target_features[i]!=0 and i==0):
+					print ("-> CloseTime (timestamp): {}".format(candle[counter]))
+					counter+=1	
 
-			print ("Candle Inserted ---> {} ".format(candle))
+				elif (target_features[i]!=0 and i==1):
+					print ("-> OpenPrice: ${}".format(candle[counter]))
+					counter+=1
+
+				elif(target_features[i]!=0 and i==2):
+					print ("-> HighPrice: ${}".format(candle[counter]))
+					counter+=1
+
+				elif (target_features[i]!=0 and i==3):
+					print ("-> LowPrice: ${}".format(candle[counter]))
+					counter+=1
+
+				elif (target_features[i]!=0 and i==4):
+					print ("-> Volume: {}".format(candle[counter]))
+
 
 
 			input_prediction=list()
