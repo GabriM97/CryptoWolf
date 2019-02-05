@@ -1,3 +1,10 @@
+v.1.0.3{
+
+- Index: created class Index which computes several statistical indices and plots.
+
+}
+
+
 v.1.0.2{
 
 - Graph: the name of "plotCryptoGraph" method has been changed to "plotCryptoChart". Other small changes to the graph.
