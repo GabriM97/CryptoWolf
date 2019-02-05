@@ -93,6 +93,18 @@ def check_format (data):
 		print ("Error, you have to insert a number \n")
 		return -1
 
-	return 0		
+	return 0
+
+#This function format the date and time values
+def print_format (val):
+	str_val=str(val)
+
+	if (len(str_val)==1):
+		ret_str=""
+		ret_str+="0"
+		ret_str+=str_val
+		return ret_str
+	else:
+		return val		
 			
 

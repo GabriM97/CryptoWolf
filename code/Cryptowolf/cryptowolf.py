@@ -5,7 +5,7 @@ import time
 from cryptowolf_assets import *
 from Time_Stamp_Converter import Time_Stamp_Converter
 from Extractor import Extractor
-
+from Dataset_Projector import Dataset_Projector 
 pca_v=False
 
 #We used ,here, the Cleaner class in order to load the normalization data
@@ -88,6 +88,8 @@ else:
 	print ("\n\n*******************CRYPTOWOLF-DAILY-CANDLE-PREDICTION*******************\n")
 	print ("Daily Opened Candle: \n\n {} \n".format(pr[0]))
 
+	projector=Dataset_Projector()
+	pr=projector.to_project (pr,target_features)
 	daily_prediction=list()
 	pr=pr[0]
 
@@ -106,7 +108,7 @@ else:
 
 	#Here we make the prediction
 	daily_prediction=estimator.predict(daily_prediction)
-
+	
 	#If we perform some trasformation on the input query, we need to return back in order to show a coherent result to the user
 	if (normalization_level==1):
 		daily_prediction=feature_scaling_2_normal (daily_prediction,pack,target_features)
@@ -122,7 +124,7 @@ else:
 #Here is the core of the program, infact in this point we ask to insert a candle in order to predict her ClosePrice
 while (True):
 	
-	print ("\n\n*******************CRYPTOWOLF-PREDICT-FROM-INPUT*******************\n")
+	print ("\n\n*******************CRYPTOWOLF-PREDICT-FROM-INPUT***********************\n")
 	print ("1) Predict a ClosePrice starting from a candle")
 	print ("2) Exit")
 	
@@ -175,6 +177,12 @@ while (True):
 						tp = Time_Stamp_Converter ()
 						closeT=tp.convert (day,month,year,hour,minutes)
 						closeT= float(closeT)
+
+						day=print_format(day)
+						month=print_format(month)
+						hour=print_format(hour)
+						minutes=print_format(minutes)
+
 						print ("You have inserted the fallowing Date and Time: {}-{}-{} {}:{} \n".format(day,month,year,hour,minutes)) 
 						print ("The corrisponding UNIX Timestamp is {} \n".format(int(closeT)))
 						candle.append(closeT)

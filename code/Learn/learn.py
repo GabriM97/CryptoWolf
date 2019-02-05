@@ -32,7 +32,7 @@ try:
 	print ("\n\n********************TRAINING-SETUP************************\n")
 
 
-	print ("1) Download/Update Data ?\n Insert: \n -> 0 - Use local data  \n -> 1 - Update data from the internet")
+	print ("1) Download/Update Data ?\n Insert: \n -> 0 - Use local data  \n -> 1 - Download/Update data from the internet")
 	answer=int(input ("\n -> "))
 	if ((answer !=0) and (answer!=1)):
 		print ("Error, you have to insert 0 or 1")

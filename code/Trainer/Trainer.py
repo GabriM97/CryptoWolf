@@ -170,8 +170,6 @@ class Trainer:
 		for i in range (len(self.j_cv)):
 			j_t=min(self.j_train[i])
 			j_c=min(self.j_cv[i])
-			j_t=round(j_t,6)
-			j_c=round(j_c,6)
 			print ("Model Number {} \n    J-Train: {}     J-CV: {} \n".format(i+1,j_t,j_c))
 							
 			
