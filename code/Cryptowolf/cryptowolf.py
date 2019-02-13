@@ -37,6 +37,7 @@ if (result==7):
 
 #Here, we extract the daily opened candle, in order to predict the ClosePrice
 e = Extractor()
+tc=Time_Stamp_Converter()
 daily_not_closed_candle = e.ohlc ("bitstamp","btcusd",-5,"1549152000","43200")
 
 if (type(daily_not_closed_candle)==int and x==-1): 
@@ -62,7 +63,7 @@ else:
 	print ("Summary Daily Opened Candle: \n")
 	for i in range (5):
 		if (i==0):
-			print ("-> CloseTime (timestamp): {}".format(pr[0][i]))
+			print ("-> CloseTime (timestamp): {} - \n-> CloseTime (Date&Time Format): {} (Local Timezone)".format(pr[0][i],tc.get_date(int(pr[0][i]))))
 		elif (i==1):
 			print ("-> OpenPrice: ${}".format(pr[0][i]))
 		elif(i==2):
@@ -195,7 +196,7 @@ while (True):
 			print ("Summary Candle Inserted: \n")
 			for i in range (5):
 				if (target_features[i]!=0 and i==0):
-					print ("-> CloseTime (timestamp): {}".format(candle[counter]))
+					print ("-> CloseTime (timestamp): {} - \n-> CloseTime (Date&Time Format): {} (Local Timezone)".format(candle[counter],tc.get_date(int(candle[counter]))))
 					counter+=1	
 
 				elif (target_features[i]!=0 and i==1):
