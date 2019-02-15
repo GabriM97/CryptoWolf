@@ -14,7 +14,7 @@ from Dataset_Creator import Dataset_Creator as DC
 from Graph import Graph
 from Index import Index
     
-# Plot the graph Timestamp vs ClosePrice  
+#It Plots the graph Timestamp vs ClosePrice  
 def graph_plot():
     exchange = "bitstamp"
     pair = "btcusd"
@@ -26,7 +26,7 @@ def graph_plot():
     graph = Graph(exchange, pair, period)
     graph.plotCryptoChart()
     
-#Calculates some Statistics Indexes
+#It Calculates some Statistics Indexes
 def index():
     idx = Index("bitstamp", "btcusd", "12-h")
     candle_matrix, closePrice_matrix = idx.create_matrix()
