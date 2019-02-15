@@ -1,8 +1,0 @@
-https://api.cryptowat.ch/markets/coinbase-pro/btcusd/ohlc?before=1546297140&after=1543618800&periods=43200
-REQUEST FROM 1/12/2018 00:00 TO 31/12/2018 23:59 EVERY 12 HOURS
-
-https://api.cryptowat.ch/markets/coinbase-pro/btcusd/ohlc?before=1546297140&after=1543618800&periods=86400
-REQUEST FROM 1/12/2018 00:00 TO 31/12/2018 23:59 EVERY 1 DAY
-
-https://api.cryptowat.ch/markets/coinbase-pro/btcusd/ohlc?before=1546297140&after=1543618800&periods=604800
-REQUEST FROM 1/12/2018 00:00 TO 31/12/2018 23:59 EVERY 1 WEEK
