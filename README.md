@@ -1,3 +1,5 @@
+<p align="center"><img src="/logo/logotype-horizontal.png"></p>
+
 # CryptoWolf
 Crypto-predicter using Machine Learning algorithms based on Linear Regression.  
 This is academic project for the [Social Media Management course](http://www.dmi.unict.it/farinella/SMM/) of University of Catania.  
