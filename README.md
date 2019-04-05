@@ -18,5 +18,8 @@ Authors
 - [@ausilianapoli](https://github.com/ausilianapoli)  
 - [@rscdev7](https://github.com/rscdev7)  
 
+Acknowledgements
+-----------------
+Thanks to [@Tobaloidee](https://github.com/Tobaloidee) for the project logo.
 
 **PS**: We have written in English language almost in all, but we apologize for parts in Italian language.  
